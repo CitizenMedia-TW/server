@@ -19,6 +19,10 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  like: {
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: "Story" }],
+    default: [],
+  },
   date: {
     type: Date,
     default: Date.now,
@@ -36,7 +40,7 @@ userSchema.methods.comparePassword = async function (password, cb) {
 };
 
 // mongoose middlewares
-// Hash the password is is newUser or is changing password. 
+// Hash the password is is newUser or is changing password.
 userSchema.pre("save", async function (next) {
   // this 代表 mongoDB 內的 document
   if (this.isNew || this.isModified("password")) {
