@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const registerValidation = require("../validation").registerValidation;
+const signupValidation = require("../validation").signupValidation;
 const loginValidation = require("../validation").loginValidation;
 const User = require("../models").user;
 const jwt = require("jsonwebtoken");
@@ -13,9 +13,9 @@ router.get("/testAPI", (req, res) => {
   return res.send("Successfully connect to auth route...");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/signup", async (req, res) => {
   // Check if data is valid
-  let { error } = registerValidation(req.body);
+  let { error } = signupValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if email is registered
