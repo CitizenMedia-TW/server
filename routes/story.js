@@ -33,6 +33,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.get("/popular", async (req, res) => {
+  const n = parseInt(req.query.n);
+  // TODO: 找讚數高的幾個
+  const stories = await Story.find().limit(n);
+  
+  return res
+    .status(200)
+    .json({ stories: stories });
+});
+
 // router.get("/findAuthor/:name", async (req, res) => {
 //   let { name } = req.params;
 //   try {
