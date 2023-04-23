@@ -27,9 +27,10 @@ app.use("/api/user", authRoute);
 
 // Story routes should be protected by jwt.
 // If jwt is not contained in the request header, the request will be seen as unauthorized.
+// Issue: 不用登入應該也能看story
 app.use(
   "/api/story",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   storyRoute
 );
 
